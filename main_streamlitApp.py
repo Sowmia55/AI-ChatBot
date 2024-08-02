@@ -76,22 +76,28 @@ def check_and_print_responses_strict(input_words, pattern_words):
 
 def handle_file_upload(uploaded_file):
     if uploaded_file is not None:
-        file_path = f"resources/{uploaded_file.name}"
-        with open(file_path, "wb") as file:
-            file.write(uploaded_file.getvalue())
+        if uploaded_file.name.endswith(".json"):
+            st.session_state.existingModules = get_json_file_names()
+            module_name = os.path.splitext(uploaded_file.name)[0]
+            if module_name not in st.session_state.existingModules:
+                file_path = f"resources/{uploaded_file.name}"
+                with open(file_path, "wb") as file:
+                    file.write(uploaded_file.getvalue())
+                st.success("File uploaded successfully!")
+            else:
+                st.error(
+                    "File name already exist. If not a duplicate file, please upload with an alternative file name.")
             # Update drop down options
             if "modules" not in st.session_state:
-                st.session_state.existingModules = [get_json_file_names]
+                st.session_state.existingModules = get_json_file_names()
                 st.session_state.modules = []
             if uploaded_file.name.endswith(".json"):
                 module_name = os.path.splitext(uploaded_file.name)[0]
                 if module_name not in st.session_state.existingModules:
                     st.session_state.modules.append(module_name)
                     st.session_state.modules.sort()
-                    st.success("File uploaded successfully!")
-                else:
-                    st.error(
-                        "File name already exist. If not a duplicate file, please upload with an alternative file name.")
+    else:
+        st.error("Choose a JSON file to upload")
 
 
 if "page" not in st.session_state:

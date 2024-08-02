@@ -1,0 +1,17 @@
+{
+    "rules": [
+      {
+        "pattern": "Need KT docs for Cypress",
+        "responses": ["https://confluence/cypress_docs"]
+      },
+      {
+        "pattern": "Need KT docs for WebdriverIO",
+        "responses": ["https://confluence/webdriver_docs"]
+      },
+      {
+        "pattern": "Need KT docs for Postman",
+        "responses": ["https://confluence/postman_docs"]
+      }
+    ]
+  }
+  

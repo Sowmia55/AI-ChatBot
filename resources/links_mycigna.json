@@ -1,0 +1,16 @@
+{
+    "rules": [
+      {
+        "pattern": "mycigna dev URL",
+        "responses": ["https://d-dummy.cigna.com"]
+      },
+      {
+        "pattern": "mycigna int URL",
+        "responses": ["https://a-dummy.cigna.com"]
+      },
+      {
+        "pattern": "mycigna prod URL",
+        "responses": ["https://p-dummy.cigna.com"]
+      }
+    ]
+}

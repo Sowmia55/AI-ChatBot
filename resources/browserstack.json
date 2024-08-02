@@ -1,0 +1,12 @@
+{
+    "rules": [
+      {
+        "pattern": "How to get access to Browserstack?",
+        "responses": ["check this confluence - httsp://confluence/bs_docs"]
+      },
+      {
+        "pattern": "How to setup local testing?",
+        "responses": ["Download and Install BS App and run binary"]
+      }
+    ]
+  }

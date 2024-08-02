@@ -1,0 +1,13 @@
+{
+    "rules": [
+      {
+        "pattern": "Need data for facets User with MED PDP coverage",
+        "responses": ["EE: facetmedpdpEE", "SP: facetmedpdpSP"]
+      },
+      {
+        "pattern": "Need data for East User with MED PDP coverage",
+        "responses": ["EE: eastmedpdpEE", "SP: eastmedpdpSP"]
+      }
+    ]
+  }
+  

@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "pattern": "What is wellness?",
+      "responses": ["wellness is a leading provider of employee well-being and engagement solutions.", "wellness offers various well-being programs for employees."]
+    },
+    {
+      "pattern": "How do I earn incentives?",
+      "responses": ["You can earn incentives by participating in activities such as walking, exercising, and completing challenges."]
+    }
+  ]
+}

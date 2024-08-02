@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "pattern": "Who is Cigna?",
+      "responses": ["Cigna is a global health company that offers health benefits and services to help people improve their health, well-being, and peace of mind."]
+    },
+    {
+      "pattern": "What are the two divisions in Cigna?",
+      "responses": ["Cigna's two divisions, Cigna Healthcare and Evernorth Health Services, serve more than 178 million customers in over 30 countries and jurisdictions."]
+    },
+    {
+      "pattern": "What does Evernorth Health Services do?",
+      "responses": ["Evernorth Health Services is a division of The Cigna Group that provides health services and solutions to improve health outcomes."]
+    },
+    {
+      "pattern": "What does Cigna Healthcare do?",
+      "responses": ["Cigna Healthcare is a health benefits provider that helps customers make choices to improve their health."]
+    },
+    {
+      "pattern": "Thanks | Thank you",
+      "responses": ["You're welcome!", "No problem! If you have any more questions, feel free to ask."]
+    }
+  ]
+}

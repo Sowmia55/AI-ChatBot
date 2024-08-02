@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "pattern": "List down the types of coverages in myCigna?",
+      "responses": ["Medical, Dental, EAP, Behavioural, Vision"]
+    },
+    {
+      "pattern": "Can facets member purchase standalone Medical coverage?",
+      "responses": ["No, Medical coverage will always be bundled with Pharmacy Coverage"]
+    }
+  ]
+}

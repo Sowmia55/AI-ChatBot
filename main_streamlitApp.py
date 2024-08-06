@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import streamlit as st
 import os
 from nltk.tokenize import word_tokenize
-from nltk.stem import SnowballStemmer
+from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import json
 
@@ -23,7 +23,7 @@ class RulesData:
 
 def tokenize_removeStopWords_stem_input(text):
     # Initialize the stemmer and get the stop words
-    stemmer1 = SnowballStemmer('english')
+    stemmer1 = PorterStemmer()
     stop_words1 = set(stopwords.words("english"))
     # Tokenize the input text
     tokens = word_tokenize(text.lower())
@@ -35,7 +35,7 @@ def tokenize_removeStopWords_stem_input(text):
 # Function to tokenize_removeStopWords_stem_pattern
 
 def tokenize_and_stem_pattern(data):
-    stemmer2 = SnowballStemmer('english') 
+    stemmer2 = PorterStemmer() 
     rules = data["rules"]      
     tokenized_stemmed_pattern = [([stemmer2.stem(word) for word in word_tokenize(rule["pattern"].lower())], rule["responses"])
                                 for rule in rules]
@@ -55,7 +55,7 @@ def get_json_file_names():
 def process_and_print_responses(input_words, pattern_words):
     count= 0
     for pattern_tokens, responses in pattern_words:
-        if all(token in pattern_tokens for token in input_words):
+        if any(token in pattern_tokens for token in input_words):
             st.write(f"___Matched Question:___ {' '.join(pattern_tokens)}")
             # prints all responses
             for index, response in enumerate(responses, start=1):
@@ -71,7 +71,7 @@ def process_and_print_responses(input_words, pattern_words):
 def process_and_print_responses_strict(input_words, pattern_words):
     count = 0
     for pattern_tokens, responses in pattern_words:
-        if any (token in pattern_tokens for token in input_words):
+        if all(token in pattern_tokens for token in input_words):
             st.write(f"___Matched Question:___ {' '.join(pattern_tokens)}")
             # prints all responses
             for index, response in enumerate(responses, start=1):
@@ -96,7 +96,7 @@ def handle_file_upload(uploaded_file):
                 st.success("File uploaded successfully!")
             else:
                 st.error(
-                    "File name already exist. If not a duplicate file, please upload with an alternative file name.")
+                    "File name already exist. If not a duplicate file, please upload with an alternative file name.")                
                     # Update drop down options
             if "modules" not in st.session_state:
                     st.session_state.existingModules = get_json_file_names()
@@ -106,15 +106,28 @@ def handle_file_upload(uploaded_file):
                 if module_name not in st.session_state.existingModules:
                     st.session_state.modules.append(module_name)
                     st.session_state.modules.sort()
-                else:
-                    st.error("Choose a JSON file to upload")
+        else:
+            st.error("Choose a JSON file to upload")
+
+# Function to override the existing JSON
+
+def override_file_upload(uploaded_file):
+        if uploaded_file is not None:
+            if uploaded_file.name.endswith(".json"):                       
+                file_path = f"resources/{uploaded_file.name}"
+                with open(file_path, "wb") as file:
+                    file.write(uploaded_file.getvalue())
+                    st.success("File uploaded successfully!")
+           
+        else:
+            st.error("Choose a JSON file to upload")
 
 if "page" not in st.session_state:
     st.session_state.page= "home"
 
 if st.session_state.page == "home":
     # header
-    st.header("Rule-Based AI chatbot using NLP")
+    st.header("Rule-Based AI Bot using NLP")
     # description
     st.subheader("Welcome to offline support")
     st.sidebar.title("Please upload your JSON here")
@@ -150,10 +163,15 @@ elif st.session_state.page == "upload":
         st.session_state.page= "home"
         st.experimental_rerun()
     uploaded_file= st.file_uploader("Choose a JSON file", type="json")
-    if st.button("Upload"):
+    if st.button("Upload a new JSON"):
         handle_file_upload(uploaded_file)
-    st.write("**Your JSON should be in below format,**")
-    st.write("""    
+    if st.button("Override existing JSON"):
+        override_file_upload(uploaded_file)
+    
+    # Create an expander section 
+    st.subheader("Your JSON should be in below format")
+    with st.expander("**View Format**", expanded=False):
+        st.write("""    
         
         {
 
@@ -161,17 +179,17 @@ elif st.session_state.page == "upload":
 
         {
 
-        "pattern": "How many types of coverages do we have",
+        "pattern": "List down the types of coverages",
 
-        "responses": ["Medical, Dental and more"]
+        "responses": ["Medical, Dental, Vision"]
 
         },
 
         {
 
-        "pattern": "How to find if a coverage is active or termed",
+        "pattern": "How to find if a coverage is active or termed?",
 
-        "responses": ["From Customer profile API"]
+        "responses": ["Check customer profile API", "Check entitlements API"]
 
         }
 

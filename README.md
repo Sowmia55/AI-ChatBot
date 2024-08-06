@@ -1,8 +1,8 @@
 SUMMARY:
 
-Have developed a "Rule-Based AI chatbot" utilizing Natural Language Processing(NLP) techniques to handle user interactions. The core of the system leverages the tokenization (splits a given text into individual words or tokens), stopwords (to remove pronouns,verbs) and stemmer (to reduce words to their root form) concepts from NLTK (Natural Language Toolkit) package in Python to process and analyze text.
+This is a "Rule-Based AI Bot" utilizing Natural Language Processing(NLP) techniques to handle user interactions. The core of the system leverages the tokenization (splits a given text into individual words or tokens), stopwords (to remove pronouns,verbs) and stemmer (to reduce words to their root form) concepts from NLTK (Natural Language Toolkit) package in Python to process and analyze text.
 
-The chatbot is designed to read user questions and match them with predefined responses stored in a JSON file. The project also incorporates a Streamlit app to provide a user-friendly interface, allowing users to input questions and receive relevant answers dynamically based on the data in the JSON file.
+The bot is designed to read user questions and match them with predefined responses stored in a JSON file. The project also incorporates a Streamlit (library to create interactive web app) to provide a user-friendly interface, allowing users to input questions and receive relevant answers dynamically based on the data in the JSON file.
 
 RUN COMMANDS:
 
